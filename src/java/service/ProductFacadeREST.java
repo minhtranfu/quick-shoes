@@ -134,7 +134,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     @GET
     @Path("/search")
     public List<Product> search(@QueryParam("manufactor") int manufactorId,
-            @QueryParam("color_id") int colorId,
+            @QueryParam("color") int colorId,
             @QueryParam("material") String materialId,
             @QueryParam("type") int categoryId,
             @QueryParam("size") int size,
@@ -188,7 +188,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
             List<Predicate> subPredicates = new ArrayList<>();
             
             if (colorId > 0) {
-                subPredicates.add(cb.equal(fromProductVersion.get("color_id"), colorId));
+                subPredicates.add(cb.equal(fromProductVersion.get("colorId"), colorId));
             }
             
             if (size > 0) {
