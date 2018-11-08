@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/utils/XMLUtilities.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/GiayTotProductCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/index.html</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/servlets/AdminServlet.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/jpa/entities/ProductVersion.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/xsd/giaybq-list-products.xsd</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/xsd/baza-list-products.xsd</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/GiayBQProductCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/threads/BaseThread.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/assets/css/style.css</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/threads/GiayTotThread.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/threads/GiayBQThread.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/service/ProductFacadeREST.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/targets/giaybq.xml</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/threads/BazaThread.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/GiayBQCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/BaseCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/xsd/giaytot-list-products.xsd</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/targets/bazavn.xml</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/BazaProductCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/jpa/entities/Category.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/crawlers/GiayTotCrawler.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/src/java/daos/CategoryDao.java</file>
+            <file>file:/C:/Users/MinhTran/Documents/NetBeansProjects/ProjectFinal/web/WEB-INF/xsd/giaytot-product-detail.xsd</file>
+        </group>
+    </open-files>
+</project-private>

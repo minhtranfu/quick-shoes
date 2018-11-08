@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shop name="GiayTot">
+    <categories>
+        <category url="https://www.giaytot.com/giay-vai-nam.html/" name="Giầy vải" sex="1"/>
+        <category url="https://www.giaytot.com/giay-nam-cong-so.html" name="Giầy công sở" sex="1"/>
+        <category url="https://www.giaytot.com/giay-luoi-nam.html" name="Giầy mọi" sex="1"/>
+        <category url="https://www.giaytot.com/giay-tang-chieu-cao.html" name="Giày tăng chiều cao" sex="1"/>
+        <category url="https://www.giaytot.com/giay-cao-co-nam.html" name="Giày cao cổ" sex="1"/>
+    </categories>
+</shop>

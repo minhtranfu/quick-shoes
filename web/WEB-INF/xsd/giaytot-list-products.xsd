@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ul">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="li">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element name="div">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="button">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="span" type="xs:string" />
+                          </xs:sequence>
+                          <xs:attribute name="type" type="xs:string" use="required" />
+                          <xs:attribute name="title" type="xs:string" use="required" />
+                          <xs:attribute name="class" type="xs:string" use="required" />
+                          <xs:attribute name="onclick" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element minOccurs="0" name="span">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="span">
+                              <xs:complexType>
+                                <xs:simpleContent>
+                                  <xs:extension base="xs:string">
+                                    <xs:attribute name="class" type="xs:string" use="required" />
+                                  </xs:extension>
+                                </xs:simpleContent>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="class" type="xs:string" use="required" />
+                          <xs:attribute name="id" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element minOccurs="0" name="a">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="img">
+                              <xs:complexType>
+                                <xs:attribute name="class" type="xs:string" use="required" />
+                                <xs:attribute name="data-src" type="xs:string" use="required" />
+                                <xs:attribute name="src" type="xs:string" use="required" />
+                                <xs:attribute name="width" type="xs:unsignedByte" use="required" />
+                                <xs:attribute name="height" type="xs:unsignedByte" use="required" />
+                                <xs:attribute name="alt" type="xs:string" use="required" />
+                                <xs:attribute name="pagespeed_url_hash" type="xs:unsignedInt" use="required" />
+                                <xs:attribute name="onload" type="xs:string" use="required" />
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="href" type="xs:string" use="required" />
+                          <xs:attribute name="title" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element minOccurs="0" maxOccurs="unbounded" name="p">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="span">
+                              <xs:complexType>
+                                <xs:simpleContent>
+                                  <xs:extension base="xs:string">
+                                    <xs:attribute name="class" type="xs:string" use="optional" />
+                                    <xs:attribute name="id" type="xs:string" use="optional" />
+                                  </xs:extension>
+                                </xs:simpleContent>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="class" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="class" type="xs:string" use="required" />
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="h3">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="a">
+                        <xs:complexType>
+                          <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                              <xs:attribute name="href" type="xs:string" use="required" />
+                              <xs:attribute name="title" type="xs:string" use="required" />
+                            </xs:extension>
+                          </xs:simpleContent>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="class" type="xs:string" use="required" />
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" use="required" />
+            <xs:attribute name="p" type="xs:unsignedShort" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="class" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

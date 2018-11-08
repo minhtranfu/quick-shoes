@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shop name="BazaVN">
+    <categories>
+        <category url="https://baza.vn/giay-vai-nam/c?scatid=d33kgwpT" name="Giầy vải" sex="1"/>
+        <category url="https://baza.vn/giay-nam-cong-so/c?scatid=iiGhXHGC" name="Giầy công sở" sex="1"/>
+        <category url="https://baza.vn/giay-moi-nam/c?scatid=t6I7mucN" name="Giầy mọi" sex="1"/>
+        <category url="https://baza.vn/giay-casual-nam/c?scatid=NvRfh3Ai" name="Giày casual" sex="1"/>
+        <category url="https://baza.vn/giay-the-thao-nam/c/?scatid=julBtj7A" name="Giày thể thao" sex="1"/>
+        <category url="https://baza.vn/giay-tang-chieu-cao-nam/c?scatid=WcLlBZbP" name="Giày tăng chiều cao" sex="1"/>
+        <category url="https://baza.vn/giay-cao-co-nam/c?scatid=iNhggw6z" name="Giày cao cổ" sex="1"/>
+        <category url="https://baza.vn/giay-vai-nu/c?scatid=kvzzgUhL" name="Giầy vải" sex="0"/>
+        <category url="https://baza.vn/giay-cao-got-nu/c?scatid=XUvtcZeB" name="Giầy cao gót" sex="0"/>
+        <category url="https://baza.vn/giay-casual-nu/c?scatid=URgh3leO" name="Giày casual" sex="0"/>
+        <category url="https://baza.vn/giay-the-thao-nu/c/?scatid=xceiXHHt" name="Giày thể thao" sex="0"/>
+        <category url="https://baza.vn/giay-bup-be-nu/c/?scatid=JJzT1eOD" name="Giày búp bê" sex="0"/>
+        <category url="https://baza.vn/giay-moi-slip-on-nu/c/?scatid=zhX1pfrx" name="Giầy mọi" sex="0"/>
+    </categories>
+</shop>

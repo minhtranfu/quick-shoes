@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/test.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE ul SYSTEM "test.dtd">
+
+    <ul>
+    ...
+    </ul>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT ul (li)*>
+<!ATTLIST ul
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT li (span|a|div|h3)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT span (#PCDATA)>
+<!ATTLIST span
+    class CDATA #IMPLIED
+    onclick CDATA #IMPLIED
+    data-pid CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT a (#PCDATA|img)*>
+<!ATTLIST a
+    target CDATA #IMPLIED
+    class CDATA #IMPLIED
+    href CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT img EMPTY>
+<!ATTLIST img
+    class CDATA #IMPLIED
+    src CDATA #IMPLIED
+    data-original CDATA #IMPLIED
+    alt CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT div (span)*>
+<!ATTLIST div
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT h3 (a)*>

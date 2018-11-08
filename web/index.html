@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tìm giày nhanh</title>
+        <meta name="viewport" content="width:device-width, initial-scale=1.0, maximum-scale=1.0, user-scaleable=no" />
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="">
+                <div class="logo">
+                    <a href="/">
+                        Tìm giày nhanh
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <section class="filters">
+                    <div class="filters-bg"></div>
+                    <div class="section-body">
+                        <h3 class="title">Bộ lọc</h3>
+                        <form action="" onsubmit="event.preventDefault();return filterData();" id="js-filters">
+                            <div class="filter">
+                                <label class="filter-name">
+                                    Tìm giày cho:
+                                </label>
+                                <label class="label-radio">
+                                    <input type="radio" name="sex" value="" checked="">
+                                    Tất cả
+                                </label>
+                                <label class="label-radio">
+                                    <input type="radio" name="sex" value="1">
+                                    Nam
+                                </label>
+                                <label class="label-radio">
+                                    <input type="radio" name="sex" value="0">
+                                    Nữ
+                                </label>
+                            </div>
+                            <div class="filter">
+                                <label for="manufactor" class="filter-name">
+                                    Nhãn hiệu:
+                                </label>
+                                <select name="manufactor" id="manufactor">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="filter">
+                                <label for="type" class="filter-name">
+                                    Loại giày:
+                                </label>
+                                <select name="type" id="type">
+                                </select>
+                            </div>
+                            <div class="filter">
+                                <label for="color" class="filter-name">
+                                    Màu:
+                                </label>
+                                <select name="color" id="color">
+                                </select>
+                            </div>
+                            <div class="filter">
+                                <label for="material" class="filter-name">
+                                    Chất liệu:
+                                </label>
+                                <select name="material" id="material">
+                                </select>
+                            </div>
+                            <div class="filter text-center">
+                                <button onclick="event.preventDefault();return filterData();" class="btn btn-green">TÌM</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <section class="main-section">
+            <div class="container">
+                <h3 class="title">Sản phẩm</h3>
+                <div class="section-body" id="js-list-products">
+                    Loading...
+                </div>
+            </div>
+        </section>
+
+        <script>
+            var AppData = {
+                categories: {},
+            };
+            var categoryXMLText = '';
+            function getXMLHttpObject() {
+                var xhr = null;
+
+                if ("ActiveXObject" in window) {
+                    try {
+                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch (e) {
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                } else {
+                    xhr = new XMLHttpRequest();
+                }
+
+                return xhr;
+            }
+
+            function loadXML(url, callback) {
+                var xhr = getXMLHttpObject();
+
+                if (xhr == null) {
+                    alert("Your browser not support AJAX, please use a newer version!");
+                    return;
+                }
+
+                xhr.open("GET", url, false);
+
+                // Helping IE11
+                try {
+                    xhr.responseType = "msxml-document";
+                } catch (err) {
+                }
+                if (callback) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            callback(xhr.responseXML);
+                        } else {
+                            console.log('Ngu người')
+                        }
+                    }
+                }
+
+                xhr.send(null);
+
+                while (xhr.readyState !== 4) {
+                    console.log("wait");
+                }
+                if ("ActiveXObject" in window && url === categoriesAPI) {
+                    categoryXMLText = xhr.responseText;
+                }
+
+                return xhr.responseXML;
+            }
+
+            var productsAPI = './api/products/search';
+            var categoriesAPI = './api/products/allCategories';
+            var defaultFilters = 'manufactor=25';
+            var listProductsXslUrl = './xsl/list-products.xsl';
+//            var listProductsXsl = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.6.0');
+//            listProductsXsl.load(listProductsXslUrl);
+//            var listProductsTemplate = new ActiveXObject('Msxml2.XSLTemplate.6.0');
+//            listProductsTemplate.stylesheet = listProductsXsl;
+//            var listProductsProcessor = listProductsTemplate.createProcessor();
+            var xsl = loadXML(listProductsXslUrl);
+            var listProductElement = document.getElementById('js-list-products');
+
+            var categoryToOptionXslUrl = './xsl/category-to-option.xsl';
+            var categoryToOptionXsl;
+            if ("ActiveXObject" in window) {
+                categoryToOptionXsl = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.6.0');
+                categoryToOptionXsl.load(categoryToOptionXslUrl);
+            } else {
+                categoryToOptionXsl = loadXML(categoryToOptionXslUrl);
+            }
+            var categoriesXML = loadXML(categoriesAPI);
+//            var categoryNodes = categoriesXML.evaluate('//category[type="manufactor"]', categoriesXML, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE);
+
+
+            var imagesSliderXslUrl = './xsl/images-to-slider.xsl';
+            var imagesSliderXsl;
+            if ("ActiveXObject" in window) {
+                imagesSliderXsl = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.6.0');
+                imagesSliderXsl.load(imagesSliderXslUrl);
+            } else {
+                imagesSliderXsl = loadXML(imagesSliderXslUrl);
+            }
+
+            // XSL for product version
+            var productVersionsXslUrl = './xsl/product-versions.xsl';
+            var productVersionsXsl = loadXML(productVersionsXslUrl);
+
+
+            function loadData(dataUrl) {
+                var xml = loadXML(dataUrl);
+//                listProductsProcessor.input = xml;
+//                listProductsProcessor.transform();
+                var result;
+
+                // for EI
+                if (typeof xml.transformNode !== "undefined") {
+                    result = xml.transformNode(xsl);
+                    listProductElement.innerHTML = result;
+                } else if (document.implementation && document.implementation.createDocument) {
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(xsl);
+                    result = xsltProcessor.transformToFragment(xml, document);
+                    listProductElement.innerHTML = "";
+                    listProductElement.appendChild(result);
+                } else {
+                    result = '<strong>Your browser was not support our website!</strong>';
+                    ;
+                    listProductElement.innerHTML = result;
+                }
+
+                formatPrices();
+
+            }
+
+            function loadDataForSelect(type, idElement) {
+                var element = document.getElementById(idElement);
+                var result;
+
+                // for EI
+                if (typeof categoriesXML.transformNode !== "undefined") {
+                    var template = new ActiveXObject('Msxml2.XslTemplate.6.0');
+                    template.stylesheet = categoryToOptionXsl;
+                    var proc = template.createProcessor();
+                    proc.input = categoriesXML;
+                    proc.addParameter('typeValue', type);
+                    proc.transform();
+                    element.innerHTML = proc.output;
+                } else if (document.implementation && document.implementation.createDocument) {
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(categoryToOptionXsl);
+                    xsltProcessor.setParameter(null, "typeValue", type);
+                    result = xsltProcessor.transformToFragment(categoriesXML, document);
+                    element.innerHTML = "";
+                    element.appendChild(result);
+                } else {
+                    result = '<option>Your browser was not support our website!</option>';
+                    ;
+                    element.innerHTML = result;
+                }
+
+            }
+
+            function loadImageForSlider(productId) {
+                //get product info
+                var productElement = document.getElementById('product-' + productId);
+                if (!productElement) {
+                    return;
+                }
+                var mainImage = productElement.getAttribute('data-image');
+
+                var element = document.getElementById('product-slider-' + productId);
+                var imagesXml = loadXML('./api/products/' + productId + '/images');
+                var result;
+
+                // for EI
+                if ("ActiveXObject" in window) {
+                    var template = new ActiveXObject('Msxml2.XslTemplate.6.0');
+                    template.stylesheet = imagesSliderXsl;
+                    var proc = template.createProcessor();
+                    proc.input = imagesXml;
+                    proc.addParameter('mainImage', mainImage);
+                    proc.transform();
+                    element.innerHTML = proc.output;
+                } else if (document.implementation && document.implementation.createDocument) {
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(imagesSliderXsl);
+                    xsltProcessor.setParameter(null, 'mainImage', mainImage);
+                    result = xsltProcessor.transformToFragment(imagesXml, document);
+                    element.appendChild(result);
+                } else {
+                    result = '<h3>Your browser was not support our website!</h3>';
+                    ;
+                    element.innerHTML = result;
+                }
+
+            }
+
+            function showProductDetail(productId) {
+                // show element if existed
+                var productDetailElement = document.getElementById("detail-" + productId);
+                if (productDetailElement) {
+                    productDetailElement.className += " show";
+                    return;
+                }
+
+                // create new element for show detail
+                productDetailElement = document.createElement("div");
+                productDetailElement.className = "product-detail-box";
+                productDetailElement.id = "detail-" + productId;
+                productDetailElement.innerHTML = '\
+                    <div class="backdrop"></div>\
+                    <button class="hide-button" onclick="hideProductDetail(' + productId + ')">Đóng</button>\
+                    <div class="product-detail">\
+                        <div class="product-slider" id="product-slider-' + productId + '"></div>\
+                        <div class="detail" id="js-product-detail-' + productId + '"></div>\
+                    </div>\
+                ';
+                document.body.appendChild(productDetailElement);
+                loadImageForSlider(productId);
+                loadProductDetail(productId);
+                productDetailElement.className += " show";
+                replaceCategories();
+            }
+
+            function loadProductDetail(productId) {
+                var productElement = document.getElementById('product-' + productId);
+                var productDetailElement = document.getElementById('js-product-detail-' + productId);
+
+                var info = productElement.getElementsByClassName('info')[0];
+                productDetailElement.innerHTML += info.innerHTML;
+                productDetailElement.innerHTML += '<div id="js-product-verions-' + productId + '"></div>';
+
+                var sourceUrl = productElement.getAttribute('data-source-url');
+                var manufactorId = productElement.getAttribute('data-manufactor');
+                var materialId = productElement.getAttribute('data-material');
+                // show product detail
+                productDetailElement.innerHTML += '<div class="line">Thương hiệu: <span class="js-category" data-category="' + manufactorId + '"></span></div>';
+                productDetailElement.innerHTML += '<div class="line">Chất liệu: <span class="js-category" data-category="' + materialId + '"></span></div>';
+
+                productDetailElement.innerHTML += '<a class="btn-go" href="' + sourceUrl + '" target="_blank">Đến website mua hàng</a>';
+                loadProductVersions(productId);
+            }
+
+            function loadProductVersions(productId) {
+                var xml = loadXML('./api/products/' + productId + '/versions');
+                var versionsElement = document.getElementById('js-product-verions-' + productId);
+                // for EI
+                if (typeof xml.transformNode !== "undefined") {
+                    result = xml.transformNode(productVersionsXsl);
+                    versionsElement.innerHTML = result;
+                } else if (document.implementation && document.implementation.createDocument) {
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(productVersionsXsl);
+                    result = xsltProcessor.transformToFragment(xml, document);
+                    versionsElement.innerHTML = "";
+                    versionsElement.appendChild(result);
+                } else {
+                    result = '<strong>Your browser was not support our website!</strong>';
+                    ;
+                    versionsElement.innerHTML = result;
+                }
+            }
+
+            function hideProductDetail(id) {
+                var productDetailElement = document.getElementById("detail-" + id);
+                if (!productDetailElement) {
+                    return;
+                }
+                productDetailElement.className = productDetailElement.className.replace(' show', '');
+            }
+
+            loadData(productsAPI + '?' + defaultFilters);
+            setTimeout(function () {
+                loadDataForSelect('type', 'type');
+                loadDataForSelect('manufactor', 'manufactor');
+                loadDataForSelect('material', 'material');
+                loadDataForSelect('color', 'color');
+            }, 100);
+
+            function formatPrices() {
+                var priceSpans = document.getElementsByClassName('js-price');
+                for (var i = 0; i < priceSpans.length; i++) {
+                    var priceSpan = priceSpans.item(i);
+                    var price = priceSpan.innerHTML;
+                    price = price.replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    price = price.replace('.0', '') + 'đ';
+                    priceSpan.innerHTML = price;
+                }
+            }
+
+            function filterData() {
+                var form = document.getElementById('js-filters');
+                var queryString = new URLSearchParams(new FormData(form)).toString()
+                loadData(productsAPI + '?' + queryString);
+
+                return false;
+            }
+
+            m = null;
+            function moveSlider(direct, target) {
+                m = target;
+                if (!direct) {
+                    direct = 'next';
+                }
+
+                var sliderElement = target.parentElement;
+                var curentSlide = sliderElement.getElementsByClassName('active')[0];
+                var nextElement;
+                if (direct === 'next') {
+                    nextElement = curentSlide.nextElementSibling;
+                    if (!nextElement) {
+                        nextElement = sliderElement.getElementsByClassName('slide')[0];
+                    }
+                } else {
+                    nextElement = curentSlide.previousElementSibling;
+                    if (!nextElement) {
+                        var allSlide = sliderElement.getElementsByClassName('slide');
+                        nextElement = allSlide[allSlide.length - 1];
+                    }
+                }
+                curentSlide.className = curentSlide.className.replace(' active', '');
+                nextElement.className += ' active';
+            }
+
+            function parseCategories() {
+                var categories;
+                if ("ActiveXObject" in window) {
+                    var parser = new DOMParser();
+                    var xmlDoc = parser.parseFromString(categoryXMLText, "text/xml");
+                    categories = xmlDoc.firstChild.childNodes;
+                    for (var i = 0; i < categories.length; i++) {
+                        var categoryElement = categories[i];
+                        var idElement = categoryElement.getElementsByTagName('id')[0];
+                        var id = idElement.firstChild.data;
+                        var nameElement = categoryElement.getElementsByTagName('name')[0];
+                        var name = nameElement.firstChild;
+                        if (name) {
+                            name = name.data;
+                        } else {
+                            name = "";
+                        }
+                        AppData.categories[id] = name;
+                    }
+                } else {
+                    categories = categoriesXML.firstElementChild.children;
+
+                    for (var i = 0; i < categories.length; i++) {
+                        var categoryElement = categories[i];
+                        var idElement = categoryElement.getElementsByTagName('id')[0];
+                        var id = idElement.innerHTML.trim();
+                        var nameElement = categoryElement.getElementsByTagName('name')[0];
+                        var name = nameElement.innerHTML.trim();
+                        AppData.categories[id] = name;
+                    }
+                }
+
+            }
+
+            parseCategories();
+            
+            function replaceCategories() {
+                var jsCategories = document.getElementsByClassName('js-category');
+                
+                while (jsCategories.length) {
+                    var jsCategory = jsCategories[0];
+                    
+                    var id = jsCategory.getAttribute('data-category');
+                    if (AppData.categories[id]) {
+                        jsCategory.innerHTML = AppData.categories[id];
+                    }
+                    jsCategory.className = jsCategory.className.replace('js-category', '');
+                }
+            }
+        </script>
+    </body>
+</html>

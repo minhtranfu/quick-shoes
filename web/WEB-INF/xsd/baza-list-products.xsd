@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="ul">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="li" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="span">
+                                <xs:complexType>
+                                    <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                    <xs:attribute name="onclick" type="xs:string"></xs:attribute>
+                                    <xs:attribute name="data-pid" type="xs:string"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="a">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="img">
+                                            <xs:complexType>
+                                                <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                                <xs:attribute name="src" type="xs:string"></xs:attribute>
+                                                <xs:attribute name="data-original" type="xs:string"></xs:attribute>
+                                                <xs:attribute name="alt" type="xs:string"></xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="target" type="xs:string"></xs:attribute>
+                                    <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                    <xs:attribute name="href" type="xs:string"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="div">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="span" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="h3">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="a">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute name="target" type="xs:string"></xs:attribute>
+                                                        <xs:attribute name="class" type="xs:string"></xs:attribute>
+                                                        <xs:attribute name="href" type="xs:string"></xs:attribute>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

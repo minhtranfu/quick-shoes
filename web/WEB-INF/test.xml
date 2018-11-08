@@ -1,0 +1,26 @@
+<ul class="product_list">
+                        <li>
+                            <span class="icon-p-like ic_plike" onclick="BindCheckProductLiked(this);" data-pid="2NOZnGOI"></span>
+                            <a target="_blank" class="hpl_pimg wait-image-loading" href="https://baza.vn/giay-da-nam-mui-nhon-nguyen-mac/p/2NOZnGOI?bzCatId=XhYCvvke&amp;bzSid=7whQIDJp&amp;bzSku=NC004-02">
+                                <img class="lazy" src="https://img1.baza.vn/upload/products-var-2NOZnGOI/G8Vfacda.JPG?v=635761854697900855&amp;width=300" data-original="https://img1.baza.vn/upload/products-var-2NOZnGOI/G8Vfacda.JPG?v=635761854697900855&amp;width=300" alt="Giầy da nam mũi nhọn Nguyễn Mạc" /></a>
+                            
+                            <div class="box_pr">
+                                    <span class="price_ps">-0%</span>
+                                    <span class="price">2.800.000đ</span>
+                                    <span class="price_old">2.800.000đ</span>
+                            </div>
+                            <h3><a target="_blank" class="prd_title" href="https://baza.vn/giay-da-nam-mui-nhon-nguyen-mac/p/2NOZnGOI?bzCatId=XhYCvvke&amp;bzSid=7whQIDJp&amp;bzSku=NC004-02">Giầy da nam mũi nhọn Nguyễn Mạc</a></h3>
+                        </li>
+                        <li>
+                            <span class="icon-p-like ic_plike" onclick="BindCheckProductLiked(this);" data-pid="OR2f6w1K"></span>
+                            <a target="_blank" class="hpl_pimg wait-image-loading" href="https://baza.vn/giay-da-nam-olunpo-qht1418/p/OR2f6w1K?bzCatId=iiGhXHGC&amp;bzSid=4JaqU1HS&amp;bzSku=OP144-06">
+                                <img class="lazy" src="https://img.baza.vn/upload/products-var-OR2f6w1K/XNoBxloK.jpg?v=635500027206742031&amp;width=300" data-original="https://img.baza.vn/upload/products-var-OR2f6w1K/XNoBxloK.jpg?v=635500027206742031&amp;width=300" alt="Gi&#224;y da nam Olunpo QHT1418" /></a>
+                            
+                            <div class="box_pr">
+                                    <span class="price_ps">-50%</span>
+                                    <span class="price">3.099.000đ</span>
+                                    <span class="price_old">6.200.000đ</span>
+                            </div>
+                            <h3><a target="_blank" class="prd_title" href="https://baza.vn/giay-da-nam-olunpo-qht1418/p/OR2f6w1K?bzCatId=iiGhXHGC&amp;bzSid=4JaqU1HS&amp;bzSku=OP144-06">Gi&#224;y da nam Olunpo QHT1418</a></h3>
+                        </li>
+</ul>
