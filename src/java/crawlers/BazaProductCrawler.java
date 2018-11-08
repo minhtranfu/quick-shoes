@@ -113,7 +113,7 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
 
             if (matcher.find()) {
                 String attributes = matcher.group(1);
-                regex = "([^,]+),? size ([\\d]+)";
+                regex = "^(.+),? size ([\\d]+)";
                 pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
                 matcher = pattern.matcher(attributes);
 
@@ -194,13 +194,15 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
 
         manufactor = matcher.group(1);
         manufactor = manufactor.replaceAll("<[^>]*>", "");
-        manufactor = manufactor.replaceAll("^[^\\w\\d]*(.+)[^\\w\\d]*$", "$1");
         manufactor = manufactor.replace(":", "").trim();
+        manufactor = manufactor.replaceAll("^[^\\w\\d]*(.+)[^\\w\\d]*$", "$1");
+        manufactor = manufactor.replaceAll("^ *([\\w\\d\\s]+) *$", "$1");
         manufactor = manufactor.trim();
         material = matcher.group(2);
         material = material.replaceAll("<[^>]*>", "");
-        material = material.replaceAll("^[^\\w\\d]*(.+)[^\\w\\d]*$", "$1");
         material = material.replace(":", "");
+        material = material.replaceAll("^[^\\w\\d]*(.+)[^\\w\\d]*$", "$1");
+        material = material.replaceAll("^ *([\\w\\d\\s]+) *$", "$1");
         material = material.trim();
 
         return true;
