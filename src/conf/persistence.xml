@@ -3,7 +3,6 @@
   <persistence-unit name="ProjectFinalPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>jpa.entities.Category</class>
-    <class>jpa.entities.Color</class>
     <class>jpa.entities.ProductVersion</class>
     <class>jpa.entities.Image</class>
     <class>jpa.entities.Product</class>
