@@ -33,7 +33,7 @@ public class ProductVersionDao extends BaseDao<ProductVersion, Long>{
         return instance;
     }
     
-    public ProductVersion getProductVersion(long productId, int colorId, int size) {
+    public ProductVersion getProductVersion(long productId, int colorId, float size) {
         EntityManager em = DBUtils.getEntityManager();
         
         try {

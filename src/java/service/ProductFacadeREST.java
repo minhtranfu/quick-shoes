@@ -118,8 +118,12 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     @GET
     @Path("/allCategories")
     public List<Category> allCategories() {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Category.class));
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Category> from = cq.from(Category.class);
+        cq.select(from);
+        cq.orderBy(cb.asc(from.get("name")));
+        
         return getEntityManager().createQuery(cq).getResultList();
     }
     
@@ -137,8 +141,11 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
             @QueryParam("color") int colorId,
             @QueryParam("material") String materialId,
             @QueryParam("type") int categoryId,
-            @QueryParam("size") int size,
-            @QueryParam("sex") String sexStr
+            @QueryParam("size") float size,
+            @QueryParam("sex") String sexStr,
+            @QueryParam("order") String order,
+            @QueryParam("page") int page,
+            @QueryParam("pageSize") int pageSize
             ) {
 
         em = getEntityManager();
@@ -199,10 +206,21 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
 
             predicates.add(cb.in(c.get("id")).value(subquery));
         }
-
+        
         cq.where(predicates.toArray(new Predicate[]{}));
+        cq.orderBy(cb.asc(c.get("price")));
         Query q = em.createQuery(cq);
-
+        
+        if (page == 0) {
+            page = 1;
+        }
+        
+        if (pageSize == 0) {
+            pageSize = 12;
+        }
+        q.setFirstResult((page - 1) * pageSize);
+        q.setMaxResults(pageSize);
+        
         return q.getResultList();
     }
 

@@ -152,6 +152,7 @@ public class GiayTotCrawler extends BaseCrawler implements Runnable {
                     } else if (tagName.equals("img") && img.isEmpty()) {
                         Attribute attrSrc = startElement.getAttributeByName(new QName("data-src"));
                         img = attrSrc.getValue().trim();
+                        // img = img.replace("/small_image/238x158/", "/image/");
                     } else if (tagName.equals("p")) {
                         Attribute attrClass = startElement.getAttributeByName(new QName("class"));
                         if (attrClass != null) {

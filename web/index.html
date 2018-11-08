@@ -68,6 +68,33 @@
                                 <select name="material" id="material">
                                 </select>
                             </div>
+                            <div class="filter">
+                                <label for="size" class="filter-name">
+                                    Size:
+                                </label>
+                                <select name="size" id="size">
+                                    <option value="">Tất cả</option>
+                                    <option>34</option>
+                                    <option>35</option>
+                                    <option>36</option>
+                                    <option>37</option>
+                                    <option>37.5</option>
+                                    <option>38</option>
+                                    <option>38.5</option>
+                                    <option>39</option>
+                                    <option>40</option>
+                                    <option>40.5</option>
+                                    <option>41</option>
+                                    <option>42</option>
+                                    <option>42.5</option>
+                                    <option>43.5</option>
+                                    <option>44</option>
+                                    <option>44.5</option>
+                                    <option>45</option>
+                                    <option>46</option>
+                                    <option>47</option>
+                                </select>
+                            </div>
                             <div class="filter text-center">
                                 <button onclick="event.preventDefault();return filterData();" class="btn btn-green">TÌM</button>
                             </div>
@@ -88,6 +115,8 @@
         <script>
             var AppData = {
                 categories: {},
+                currentPage: 1,
+                pageSize: 12,
             };
             var categoryXMLText = '';
             function getXMLHttpObject() {
@@ -145,7 +174,7 @@
 
             var productsAPI = './api/products/search';
             var categoriesAPI = './api/products/allCategories';
-            var defaultFilters = 'manufactor=25';
+            var defaultFilters = '';
             var listProductsXslUrl = './xsl/list-products.xsl';
 //            var listProductsXsl = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.6.0');
 //            listProductsXsl.load(listProductsXslUrl);
@@ -181,7 +210,13 @@
             var productVersionsXsl = loadXML(productVersionsXslUrl);
 
 
-            function loadData(dataUrl) {
+            function loadData(dataUrl, page) {
+                if (!page) {
+                    page = 1;
+                    AppData.currentPage = 1;
+                    listProductElement.innerHTML = "";
+                }
+                dataUrl += '&page=' + page + '&pageSize=' + AppData.pageSize;
                 var xml = loadXML(dataUrl);
 //                listProductsProcessor.input = xml;
 //                listProductsProcessor.transform();
@@ -190,17 +225,15 @@
                 // for EI
                 if (typeof xml.transformNode !== "undefined") {
                     result = xml.transformNode(xsl);
-                    listProductElement.innerHTML = result;
+                    listProductElement.innerHTML += result;
                 } else if (document.implementation && document.implementation.createDocument) {
                     var xsltProcessor = new XSLTProcessor();
                     xsltProcessor.importStylesheet(xsl);
                     result = xsltProcessor.transformToFragment(xml, document);
-                    listProductElement.innerHTML = "";
                     listProductElement.appendChild(result);
                 } else {
                     result = '<strong>Your browser was not support our website!</strong>';
-                    ;
-                    listProductElement.innerHTML = result;
+                    listProductElement.innerHTML += result;
                 }
 
                 formatPrices();
@@ -354,12 +387,13 @@
 
             function formatPrices() {
                 var priceSpans = document.getElementsByClassName('js-price');
-                for (var i = 0; i < priceSpans.length; i++) {
-                    var priceSpan = priceSpans.item(i);
+                while (priceSpans.length) {
+                    var priceSpan = priceSpans.item(0);
                     var price = priceSpan.innerHTML;
                     price = price.replace(/\d(?=(\d{3})+\.)/g, '$&,');
                     price = price.replace('.0', '') + 'đ';
                     priceSpan.innerHTML = price;
+                    priceSpan.className = priceSpan.className.replace('js-price', '');
                 }
             }
 
@@ -445,6 +479,13 @@
                     }
                     jsCategory.className = jsCategory.className.replace('js-category', '');
                 }
+            }
+            
+            function viewmore(target) {
+                var form = document.getElementById('js-filters');
+                var queryString = new URLSearchParams(new FormData(form)).toString()
+                loadData(productsAPI + '?' + queryString, ++AppData.currentPage);
+                target.remove();
             }
         </script>
     </body>

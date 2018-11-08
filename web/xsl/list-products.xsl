@@ -13,9 +13,9 @@
 
     <xsl:template match="/">
         <div class="list-products">
-            <xsl:if test="count(products/product) = 0">
-                <h2>Không có sản phẩm nào, vui lòng chọn sản phẩm khác</h2>
-            </xsl:if>
+<!--            <xsl:if test="count(products/product) = 0">
+                <h2>Không còn sản phẩm nào</h2>
+            </xsl:if>-->
             <xsl:for-each select="products/product">
                 <div onclick="showProductDetail({id})" class="product" id="product-{id}"
                      data-image="{image}" data-type="{categoryId}"
@@ -39,6 +39,9 @@
                     </div>
                 </div>
             </xsl:for-each>
+            <xsl:if test="count(products/product) = 12">
+                <button class="btn-viewmore" onclick="viewmore(this);">Xem thêm</button>
+            </xsl:if>
         </div>
     </xsl:template>
 

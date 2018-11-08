@@ -48,7 +48,7 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
     private double oldPrice;
     private String code;
     private String color;
-    private List<Integer> sizes;
+    private List<Float> sizes;
     private short sex;
     private String manufactor;
     private String material;
@@ -110,9 +110,7 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
             // Getting product info done, save data
             Product product = new Product(name, categoryId, sex, price, oldPrice, img, shopId, code, url, null, null);
             saveProduct(product, color, sizes, images, manufactor, material);
-            System.out.println("Done " + url);
         } catch (Exception e) {
-            System.out.println("URL product: " + url);
             Logger.getLogger(GiayTotProductCrawler.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -152,14 +150,14 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
      */
     private boolean getSizesFromHTML(String versionInfoSection) {
 
-        String regex = "changeProductSize\\(this,'([\\d]+)'\\)";
+        String regex = "<li[^>]+onclick[^>]+>([^<]+)<\\/li>";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(versionInfoSection);
 
         sizes = new ArrayList<>();
         while (matcher.find()) {
-            String sizeStr = matcher.group(1);
-            int size = Integer.parseInt(sizeStr);
+            String sizeStr = matcher.group(1).trim();
+            float size = Float.parseFloat(sizeStr);
             sizes.add(size);
         }
 
@@ -210,7 +208,7 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
      * Save data after get data from target product URL
      */
     private static synchronized void saveProduct(Product product, String color,
-            List<Integer> sizes, List<String> images, String manufactor, String material) {
+            List<Float> sizes, List<String> images, String manufactor, String material) {
 
         
         try {
@@ -249,7 +247,7 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
         }
     }
 
-    private static synchronized boolean saveProductVersion(long productId, String colorName, List<Integer> sizes) {
+    private static synchronized boolean saveProductVersion(long productId, String colorName, List<Float> sizes) {
         
         boolean isProductVersionExisted = false;
         try {
@@ -260,7 +258,7 @@ public class GiayTotProductCrawler extends BaseCrawler implements Runnable {
 
             // Save product version
             ProductVersionDao psDao = ProductVersionDao.getInstance();
-            for (int size : sizes) {
+            for (float size : sizes) {
                 if (psDao.getProductVersion(productId, colorId, size) != null) {
                     isProductVersionExisted = true;
                     continue;

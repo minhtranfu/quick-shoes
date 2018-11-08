@@ -47,7 +47,7 @@ public class ProductVersion implements Serializable {
     private int colorId;
     @Basic(optional = false)
     @Column(name = "size", nullable = false)
-    private int size;
+    private float size;
 
     public ProductVersion() {
     }
@@ -56,13 +56,13 @@ public class ProductVersion implements Serializable {
         this.id = id;
     }
 
-    public ProductVersion(long productId, int colorId, int size) {
+    public ProductVersion(long productId, int colorId, float size) {
         this.productId = productId;
         this.colorId = colorId;
         this.size = size;
     }
 
-    public ProductVersion(Long id, long productId, int colorId, int size) {
+    public ProductVersion(Long id, long productId, int colorId, float size) {
         this.id = id;
         this.productId = productId;
         this.colorId = colorId;
@@ -93,11 +93,11 @@ public class ProductVersion implements Serializable {
         this.colorId = colorId;
     }
 
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
     }
 

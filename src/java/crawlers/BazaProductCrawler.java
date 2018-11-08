@@ -50,7 +50,7 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
     private double oldPrice;
     private String code;
     private String color;
-    private int size;
+    private float size;
     private short sex;
     private String manufactor;
     private String material;
@@ -113,14 +113,14 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
 
             if (matcher.find()) {
                 String attributes = matcher.group(1);
-                regex = "^(.+),? size ([\\d]+)";
+                regex = "^(.+),? size ([\\d\\.]+)";
                 pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
                 matcher = pattern.matcher(attributes);
 
                 if (matcher.find()) {
                     color = matcher.group(1);
                     color = colorProcess(color);
-                    size = Integer.parseInt(matcher.group(2).trim());
+                    size = Float.parseFloat(matcher.group(2).trim());
                 }
             }
 
@@ -167,7 +167,6 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
             Product product = new Product(name, categoryId, sex, price, oldPrice, img, shopId, code, url, null, null);
             saveProduct(product, color, size, images, manufactor, material);
         } catch (Exception e) {
-            System.out.println("URL product: " + url);
             Logger.getLogger(BazaProductCrawler.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -228,14 +227,14 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
      */
     private boolean getVersionInfoFromHTML(String versionInfoSection) {
 
-        String regex = "<strong title=\"([^\"]+),? size ([\\d]+)[^\"]*\"";
+        String regex = "<strong title=\"([^\"]+),? size ([\\d\\.]+)[^\"]*\"";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(versionInfoSection);
 
         if (matcher.find()) {
             color = matcher.group(1);
             color = colorProcess(color);
-            size = Integer.parseInt(matcher.group(2));
+            size = Float.parseFloat(matcher.group(2));
         } else {
             getVersionInfo();
         }
@@ -291,7 +290,7 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
      * Save data after get data from target product URL
      */
     private static synchronized void saveProduct(Product product, String color,
-            int size, List<String> images, String manufactor, String material) {
+            float size, List<String> images, String manufactor, String material) {
 
         
         try {
@@ -325,7 +324,7 @@ public class BazaProductCrawler extends BaseCrawler implements Runnable {
         }
     }
 
-    private static synchronized void saveProductVersion(long productId, String colorName, int size, boolean needCheckExists) {
+    private static synchronized void saveProductVersion(long productId, String colorName, float size, boolean needCheckExists) {
 
         try {
             // Set exists color or new
