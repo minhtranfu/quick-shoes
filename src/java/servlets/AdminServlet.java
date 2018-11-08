@@ -5,22 +5,18 @@
  */
 package servlets;
 
+import crawlers.BazaProductCrawler;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.text.StringEscapeUtils;
 import threads.BaseThread;
 import threads.BazaThread;
-import threads.GiayBQThread;
 import threads.GiayTotThread;
-import utils.ColorUtils;
 
 /**
  *
@@ -59,7 +55,7 @@ public class AdminServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             
-                   
+
             ServletContext context = getServletContext();
             if (testParam == null) {
                 BazaThread bazaThread = new BazaThread(context);
@@ -78,7 +74,7 @@ public class AdminServlet extends HttpServlet {
             
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
